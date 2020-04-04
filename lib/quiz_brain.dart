@@ -33,7 +33,6 @@ class QuizBrain {
   void nextQuestion() {
     if (_questionNumber < _questions.length - 1) {
       _questionNumber++;
-      print(_questionNumber);
     }
   }
 
