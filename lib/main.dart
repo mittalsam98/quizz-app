@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'quiz_brain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 void main() => runApp(Quizzler());
 
@@ -45,7 +46,16 @@ class _QuizPageState extends State<QuizPage> {
         ));
       }
 
-      quizBrain.nextQuestion();
+      if (!quizBrain.nextQuestion() == true) {
+        Alert(
+                context: context,
+                title: "Finished",
+                desc:
+                    "You have reached the end of the quiz. Click CANCEL to restart")
+            .show();
+        quizBrain.resetQuestion();
+        scoreKeeper = [];
+      }
     });
   }
 

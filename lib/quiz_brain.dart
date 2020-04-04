@@ -30,9 +30,12 @@ class QuizBrain {
         true),
   ];
 
-  void nextQuestion() {
+  bool nextQuestion() {
     if (_questionNumber < _questions.length - 1) {
       _questionNumber++;
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -42,5 +45,9 @@ class QuizBrain {
 
   bool getQuestionAnswer() {
     return _questions[_questionNumber].questionAnswer;
+  }
+
+  void resetQuestion() {
+    _questionNumber = 0;
   }
 }
