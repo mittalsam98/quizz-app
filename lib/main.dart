@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'quiz_brain.dart';
 
 void main() => runApp(Quizzler());
+
+QuizBrain quizBrain = QuizBrain();
 
 class Quizzler extends StatelessWidget {
   @override
@@ -26,12 +29,7 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
-  List<String> questions = [
-    'You can lead cow downstairs but not upstairs',
-    'Approx one quarter of human bones is in the foot',
-    'A slug\'s blood is green'
-  ];
-  int questionNumber = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -44,7 +42,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10),
             child: Center(
               child: Text(
-                questions[questionNumber],
+                quizBrain.getQuestionText(),
                 style: TextStyle(
                   fontSize: 25,
                   color: Colors.white,
@@ -68,8 +66,15 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                bool correctAnswer = quizBrain.getQuestionAnswer();
+                if (correctAnswer == true) {
+                  print('Your answer is right');
+                } else {
+                  print('Your answer is wrong');
+                }
+
                 setState(() {
-                  questionNumber++;
+                  quizBrain.nextQuestion();
                 });
               },
             ),
@@ -88,8 +93,15 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                bool correctAnswer = quizBrain.getQuestionAnswer();
+                if (correctAnswer == false) {
+                  print('Your answer is right');
+                } else {
+                  print('Your answer is wrong');
+                }
+
                 setState(() {
-                  questionNumber++;
+                  quizBrain.nextQuestion();
                 });
               },
             ),
